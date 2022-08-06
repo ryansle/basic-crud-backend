@@ -1,6 +1,6 @@
 export default interface List {
-  id: string;
+  id?: string;
   name: string;
-  description: string;
+  description?: string;
   tasks: string[];
 }

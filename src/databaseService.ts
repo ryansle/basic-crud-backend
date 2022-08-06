@@ -4,15 +4,15 @@ const fs = require('fs');
 import { v4 as uuid } from 'uuid';
 
 // Models
-import Data from './models/enums';
+import { Data } from './models/enums';
 import List from './models/List';
 import Task from './models/Task';
 
 // This is essentially our dataSource
 
 // Mock database
-const lists = './data/lists.json';
-const tasks = './data/tasks.json';
+const lists = '/Users/ryanle/Desktop/projects/basic-crud-backend/src/data/lists.json';
+const tasks = '/Users/ryanle/Desktop/projects/basic-crud-backend/src/data/tasks.json';
 
 class DatabaseService {
   // Typically in a database service we would
@@ -34,12 +34,12 @@ class DatabaseService {
 
         resolve(items);
       } catch (e) {
-        reject('Error: items are not available');
+        reject('items are not available');
       }
     });
   }
 
-  getItemById = (id, type): Promise<List | Task> => {
+  getItemById = (id, type): Promise<any> => {
     return new Promise((resolve, reject) => {
       const file = this.getStore(type);
       try {
@@ -47,10 +47,10 @@ class DatabaseService {
         const items = JSON.parse(contents);
 
         const result = items.find((item) => item.id === id);
-        if (!result) return reject(`Error: item with id ${id} found`);
+        if (!result) return reject(`item with id ${id} found`);
         return resolve(result);
       } catch (e) {
-        reject('Error: items are not available');
+        reject('items are not available');
       }
     });
   }
@@ -63,13 +63,13 @@ class DatabaseService {
         const items = JSON.parse(contents);
 
         const index = items.findIndex((item) => item.id === id);
-        if (index === -1) return reject(`Error: no item found with id ${id}`);
+        if (index === -1) return reject(`no item found with id ${id}`);
         const remaining = items.splice(index, 1);
 
         fs.writeFileSync(file, JSON.stringify(remaining));
         resolve();
       } catch (e) {
-        reject('Error: items are not available');
+        reject('items are not available');
       }
     });
   }
@@ -82,13 +82,13 @@ class DatabaseService {
         const items = JSON.parse(contents);
 
         const index = items.findIndex((item) => item.id === toBeReplaced.id);
-        if (index === -1) return reject(`Error: no item found with id ${toBeReplaced.id}`);
+        if (index === -1) return reject(`no item found with id ${toBeReplaced.id}`);
 
         items[index] = toBeReplaced;
         fs.writeFileSync(file, JSON.stringify(items));
         resolve();
       } catch (e) {
-        reject('Error: items are not available');
+        reject('items are not available');
       }
     });
   }
@@ -96,16 +96,14 @@ class DatabaseService {
   createItem = (body, type): Promise<Task | List> => {
     return new Promise((resolve, reject) => {
       const file = this.getStore(type);
+
       try {
         body.id = uuid();
-        const contents = fs.readFileSync(file);
-        const items = JSON.parse(contents);
 
-        items.push(body);
-        fs.writeFileSync(file, JSON.stringify(items));
+        fs.writeFileSync(file, JSON.stringify(body));
         resolve(body);
       } catch (e) {
-        reject('Error: could not create resource');
+        reject('could not create resource');
       }
     })
   }

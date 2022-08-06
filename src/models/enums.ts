@@ -1,3 +1,3 @@
-export default enum Data {
+export enum Data {
   LIST, TASK
 }
