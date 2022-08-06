@@ -1,6 +1,26 @@
-{
-  "name": "TODOs",
-  "description": "This is a test",
-  "tasks": [],
-  "id": "67bab8d6-6666-4f15-9f2a-6b7d7c1930a4"
-}
+[
+  {
+    "name": "TODOs",
+    "description": "This is a test",
+    "tasks": [],
+    "id": "2c58e51b-8a6b-4ebf-847c-8f5781314342"
+  },
+  {
+    "name": "TODOs",
+    "description": "This is a test",
+    "tasks": [],
+    "id": "c9ec0e32-ffea-460d-9dd7-4427b91238c4"
+  },
+  {
+    "name": "TODOs",
+    "description": "This is a test",
+    "tasks": [],
+    "id": "596ab311-1cee-4c20-ba3b-4c7d46cf390b"
+  },
+  {
+    "name": "TODOs",
+    "description": "This is a test",
+    "tasks": [],
+    "id": "eb1a3796-0b58-48c3-8eb8-9bbed265ee57"
+  }
+]

@@ -9,8 +9,6 @@ export default class ListManager {
       throw 'List requires a name';
     }
 
-    console.log(body)
-
     // Sanitize the item and make sure its of the
     //  correct type first
     const item: List = {

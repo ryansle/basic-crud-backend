@@ -1,4 +1,5 @@
 const fs = require('fs');
+const fsPromises = require('fs/promises');
 
 // Utilities
 import { v4 as uuid } from 'uuid';
@@ -100,7 +101,11 @@ class DatabaseService {
       try {
         body.id = uuid();
 
-        fs.writeFileSync(file, JSON.stringify(body));
+        const contents = fs.readFileSync(file);
+        const items = JSON.parse(contents);
+
+        items.push(body);
+        fs.writeFileSync(file, JSON.stringify(items));
         resolve(body);
       } catch (e) {
         reject('could not create resource');
